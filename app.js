@@ -35,19 +35,16 @@ $.get(url, function (response) {
 
 let url2 = "https://api.openweathermap.org/data/2.5/onecall?lat=49.99&lon=4.1005&lang=fr&units=metric&exclude=minutely,hourly,alerts&appid=f5c382e18131ee20c243227653a7d50c";
 
-$.get(url2, function (response) {
+$.get(url2, function () {
     //jour 1 --> demain
     jours("#date1", "#tempsMax1", "#tempsMin1", 1, 0);
     imageTemps(0, "#imageTemps1");
-
     //Jour 2
     jours("#date2","#tempsMax2", "#tempsMin2", 2, 1);
     imageTemps(1, "#imageTemps2");
-
     //Jour 3
     jours("#date3", "#tempsMax3", "#tempsMin3", 3, 2);
     imageTemps(2, "#imageTemps3");
-
     //Jour 4
     jours("#date4", "#tempsMax4", "#tempsMin4", 4, 3)
     imageTemps(3, "#imageTemps4");
@@ -69,7 +66,6 @@ function imageTemps(i, id) {
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-snow_1f328-fe0f.png");
         } else if (response.daily[i].weather[0].main === "Lightning") { //nuage avec éclair
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-lightning_1f329-fe0f.png");
-
         }
     })
 }
