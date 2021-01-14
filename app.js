@@ -37,51 +37,60 @@ let url2 = "https://api.openweathermap.org/data/2.5/onecall?lat=49.99&lon=4.1005
 
 $.get(url2, function (response) {
     //jour 1 --> demain
-    jours("date1", "tempsMax1", "tempsMin1", 1, 0);
-    imageTemps(0, "imageTemps1");
+    jours("#date1", "#tempsMax1", "#tempsMin1", 1, 0);
+    imageTemps(0, "#imageTemps1");
 
     //Jour 2
-    jours("date2","tempsMax2", "tempsMin2", 2, 1);
-    imageTemps(1, "imageTemps2");
+    jours("#date2","#tempsMax2", "#tempsMin2", 2, 1);
+    imageTemps(1, "#imageTemps2");
 
     //Jour 3
-    jours("date3", "tempsMax3", "tempsMin3", 3, 2);
-    imageTemps(2, "imageTemps3");
+    jours("#date3", "#tempsMax3", "#tempsMin3", 3, 2);
+    imageTemps(2, "#imageTemps3");
 
     //Jour 4
-    jours("date4", "tempsMax4", "tempsMin4", 4, 3)
-    imageTemps(3, "imageTemps4");
+    jours("#date4", "#tempsMax4", "#tempsMin4", 4, 3)
+    imageTemps(3, "#imageTemps4");
 })
 
-function imageTemps(i, id, response){
-    if (response.daily[i].weather[0].main === "Cloudy"){ //soleil avec nuage
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun-behind-cloud_26c5.png");
-    }
-    else if(response.daily[i].weather[0].main === "Clouds"){ //nuages
-        $(id).attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud_2601-fe0f.png");
-    }
-    else if (response.daily[i].weather[0].main === "Fog" || response.daily[i].weather[0].main === "Haze" || response.daily[i].weather[0].main === "Mist") { //brouillard et brume
-        $(id).attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/fog_1f32b-fe0f.png");
-    }
-    else if(response.daily[i].weather[0].main === "Rain"){ //nuage avec pluie
-        $(id).attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-rain_1f327-fe0f.png");
-    }
-    else if (response.daily[i].weather[0].main === "Clear"){ //soleil
-        $(id).attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun_2600-fe0f.png");
-    }
-    else if (response.daily[i].weather[0].main === "Snow"){ //nuage avec neige
-        $(id).attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-snow_1f328-fe0f.png");
-    }
-    else if (response.daily[i].weather[0].main === "Lightning"){ //nuage avec éclair
-        $(id).attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-lightning_1f329-fe0f.png");
-    }
+function imageTemps(i, id){
+    $.ajax({
+        url2 : "https://api.openweathermap.org/data/2.5/onecall?lat=49.99&lon=4.1005&lang=fr&units=metric&exclude=minutely,hourly,alerts&appid=f5c382e18131ee20c243227653a7d50c",
+        method: "GET",
+        dataType : "json"
+    })
+        .done(function (response) {
+            if (response.daily[i].weather[0].main === "Cloudy") { //soleil avec nuage
+                $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun-behind-cloud_26c5.png");
+            } else if (response.daily[i].weather[0].main === "Clouds") { //nuages
+                $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud_2601-fe0f.png");
+            } else if (response.daily[i].weather[0].main === "Fog" || response.daily[i].weather[0].main === "Haze" || response.daily[i].weather[0].main === "Mist") { //brouillard et brume
+                $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/fog_1f32b-fe0f.png");
+            } else if (response.daily[i].weather[0].main === "Rain") { //nuage avec pluie
+                $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-rain_1f327-fe0f.png");
+            } else if (response.daily[i].weather[0].main === "Clear") { //soleil
+                $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun_2600-fe0f.png");
+            } else if (response.daily[i].weather[0].main === "Snow") { //nuage avec neige
+                $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-snow_1f328-fe0f.png");
+            } else if (response.daily[i].weather[0].main === "Lightning") { //nuage avec éclair
+                $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-lightning_1f329-fe0f.png");
+            }
+        })
 }
 
-function jours(idDate,idTempsMax,idTempsMin,jours,i,response) {
-    let aujourdhui = new Date();
-    $(idDate).html((aujourdhui.getDate() + jours) + "/" + aujourdhui.getMonth() + 1 + "/" + aujourdhui.getFullYear());
-    $(idTempsMax).html($(idTempsMax).html() + Math.round(response.daily[i].temp.max) + "°");
-    $(idTempsMin).html($(idTempsMin).html() + Math.round(response.daily[i].temp.min) + "°");
+function jours(idDate,idTempsMax,idTempsMin,jours,i) {
+    $.ajax({
+        url2 : "https://api.openweathermap.org/data/2.5/onecall?lat=49.99&lon=4.1005&lang=fr&units=metric&exclude=minutely,hourly,alerts&appid=f5c382e18131ee20c243227653a7d50c",
+        method: "GET",
+        dataType : "json"
+    })
+        .done(function (response){
+            let aujourdhui = new Date();
+            $(idDate).html((aujourdhui.getDate() + jours) + "/" + aujourdhui.getMonth() + 1 + "/" + aujourdhui.getFullYear());
+            $(idTempsMax).html($(idTempsMax).html() + Math.round(response.daily[i].temp.max) + "°");
+            $(idTempsMin).html($(idTempsMin).html() + Math.round(response.daily[i].temp.min) + "°");
+        })
+
 }
 
 console.log($.get(url2));
