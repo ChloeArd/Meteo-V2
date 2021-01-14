@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Météo</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="container">
+        <div id="logoimg">
+            <img src="https://cdn.discordapp.com/attachments/689017273050202134/797498087098155038/unknown.png" alt="logoMeteo">
+        </div>
+        <div id="temps">
+            <h1 id="state"></h1>
+            <p id="date"></p>
+            <img id="imageTemps" src="">
+            <p id="typeTemps"></p>
+            <p id="temperature"></p>
+            <div class="row">
+                <p id="tempsMax"></p>
+                <p id="tempsMin"></p>
+            </div>
+            <div id="autreInfos">
+                <div class="traits"></div>
+                <div class="row">
+                    <p id="humidity"></p>
+                    <p id="windSpeed"></p>
+                </div>
+            </div>
+            <div id="previsions">
+                <div id="jour1">
+                    <p id="date1"></p>
+                    <img id="imageTemps1" src="">
+                    <p id="tempsMax1">Max: </p>
+                    <p id="tempsMin1">Min: </p>
+                </div>
+                <div class="traits2"></div>
+                <div id="jour2">
+                    <p id="date2"></p>
+                    <img id="imageTemps2" src="">
+                    <p id="tempsMax2">Max: </p>
+                    <p id="tempsMin2">Min: </p>
+                </div>
+                <div class="traits2"></div>
+                <div id="jour3">
+                    <p id="date3"></p>
+                    <img id="imageTemps3" src="">
+                    <p id="tempsMax3">Max: </p>
+                    <p id="tempsMin3">Min: </p>
+                </div>
+                <div class="traits2"></div>
+                <div id="jour4">
+                    <p id="date4"></p>
+                    <img id="imageTemps4" src="">
+                    <p id="tempsMax4">Max: </p>
+                    <p id="tempsMin4">Min: </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>
