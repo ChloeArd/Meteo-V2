@@ -53,27 +53,32 @@ $.get(url2, function (response) {
     imageTemps(3, "#imageTemps4");
 })
 
-function imageTemps(i, id, response) {
-    if (response.daily[i].weather[0].main === "Cloudy") { //soleil avec nuage
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun-behind-cloud_26c5.png");
-    } else if (response.daily[i].weather[0].main === "Clouds") { //nuages
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud_2601-fe0f.png");
-    } else if (response.daily[i].weather[0].main === "Fog" || response.daily[i].weather[0].main === "Haze" || response.daily[i].weather[0].main === "Mist") { //brouillard et brume
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/fog_1f32b-fe0f.png");
-    } else if (response.daily[i].weather[0].main === "Rain") { //nuage avec pluie
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-rain_1f327-fe0f.png");
-    } else if (response.daily[i].weather[0].main === "Clear") { //soleil
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun_2600-fe0f.png");
-    } else if (response.daily[i].weather[0].main === "Snow") { //nuage avec neige
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-snow_1f328-fe0f.png");
-    } else if (response.daily[i].weather[0].main === "Lightning") { //nuage avec éclair
-        $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-lightning_1f329-fe0f.png");
-    }
+function imageTemps(i, id) {
+    $.get(url2, function (response) {
+        if (response.daily[i].weather[0].main === "Cloudy") { //soleil avec nuage
+            $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun-behind-cloud_26c5.png");
+        } else if (response.daily[i].weather[0].main === "Clouds") { //nuages
+            $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud_2601-fe0f.png");
+        } else if (response.daily[i].weather[0].main === "Fog" || response.daily[i].weather[0].main === "Haze" || response.daily[i].weather[0].main === "Mist") { //brouillard et brume
+            $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/fog_1f32b-fe0f.png");
+        } else if (response.daily[i].weather[0].main === "Rain") { //nuage avec pluie
+            $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-rain_1f327-fe0f.png");
+        } else if (response.daily[i].weather[0].main === "Clear") { //soleil
+            $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun_2600-fe0f.png");
+        } else if (response.daily[i].weather[0].main === "Snow") { //nuage avec neige
+            $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-snow_1f328-fe0f.png");
+        } else if (response.daily[i].weather[0].main === "Lightning") { //nuage avec éclair
+            $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-lightning_1f329-fe0f.png");
+
+        }
+    })
 }
 
-function jours(idDate,idTempsMax,idTempsMin,jours,i,response) {
-    let aujourdhui = new Date();
-    $(idDate).html((aujourdhui.getDate() + jours) + "/" + aujourdhui.getMonth() + 1 + "/" + aujourdhui.getFullYear());
-    $(idTempsMax).html($(idTempsMax).html() + Math.round(response.daily[i].temp.max) + "°");
-    $(idTempsMin).html($(idTempsMin).html() + Math.round(response.daily[i].temp.min) + "°");
+function jours(idDate, idTempsMax, idTempsMin, jours, i) {
+    $.get(url2, function (response) {
+        let aujourdhui = new Date();
+        $(idDate).html((aujourdhui.getDate() + jours) + "/" + aujourdhui.getMonth() + 1 + "/" + aujourdhui.getFullYear());
+        $(idTempsMax).html($(idTempsMax).html() + Math.round(response.daily[i].temp.max) + "°");
+        $(idTempsMin).html($(idTempsMin).html() + Math.round(response.daily[i].temp.min) + "°");
+    })
 }
