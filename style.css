@@ -99,6 +99,7 @@ h1 {
     }
     #day1, #day2, #day3, #day4 {
         flex-direction: row;
+        font-size: 20px;
     }
     .verticalLine {
         border-top: 2px solid white;
@@ -106,12 +107,6 @@ h1 {
         width: 100%;
         margin-top: 5px;
         margin-bottom: 5px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    #day1, #day2, #day3, #day4 {
-        font-size: 20px;
     }
     #imageWeather1, #imageWeather2, #imageWeather3, #imageWeather4 {
         width: 25px;
