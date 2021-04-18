@@ -33,7 +33,7 @@ $.get(url, function (response) { // The response in parameter contains our data 
     else if (response.weather[0].main === "Lightning"){
         $("#imageWeather").attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-lightning_1f329-fe0f.png");
     }
-})
+});
 
 let url2 = "https://api.openweathermap.org/data/2.5/onecall?lat=49.99&lon=4.1005&lang=fr&units=metric&exclude=minutely,hourly,alerts&appid=f5c382e18131ee20c243227653a7d50c";
 
@@ -50,7 +50,7 @@ $.get(url2, function () {
     //day 4
     days("#date4", "#degreeMax4", "#degreeMin4", 4, 3)
     imageWeather(3, "#imageWeather4");
-})
+});
 
 /**
  * One image as a function of weather for each day.
@@ -61,35 +61,46 @@ function imageWeather(i, id) {
     $.get(url2, function (response) {
         if (response.daily[i].weather[0].main === "Cloudy") {
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun-behind-cloud_26c5.png");
-        } else if (response.daily[i].weather[0].main === "Clouds") {
+        }
+        else if (response.daily[i].weather[0].main === "Clouds") {
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud_2601-fe0f.png");
-        } else if (response.daily[i].weather[0].main === "Fog" || response.daily[i].weather[0].main === "Haze" || response.daily[i].weather[0].main === "Mist") {
+        }
+        else if (response.daily[i].weather[0].main === "Fog" || response.daily[i].weather[0].main === "Haze" || response.daily[i].weather[0].main === "Mist") {
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/fog_1f32b-fe0f.png");
-        } else if (response.daily[i].weather[0].main === "Rain") {
+        }
+        else if (response.daily[i].weather[0].main === "Rain") {
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-rain_1f327-fe0f.png");
-        } else if (response.daily[i].weather[0].main === "Clear") {
+        }
+        else if (response.daily[i].weather[0].main === "Clear") {
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/sun_2600-fe0f.png");
-        } else if (response.daily[i].weather[0].main === "Snow") {
+        }
+        else if (response.daily[i].weather[0].main === "Snow") {
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-snow_1f328-fe0f.png");
-        } else if (response.daily[i].weather[0].main === "Lightning") { //nuage avec éclair
+        }
+        else if (response.daily[i].weather[0].main === "Lightning") { //nuage avec éclair
             $(id).attr("src", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/271/cloud-with-lightning_1f329-fe0f.png");
         }
-    })
+    });
 }
 
 /**
  * The function allows you to add more days for the date, to set the max and min degrees as a function of i for the day.
  * @param idDate
- * @param idTempsMax
- * @param idTempsMin
- * @param jours
+ * @param idWeatherMax
+ * @param idWeatherMin
+ * @param days
  * @param i
  */
-function days(idDate, idTempsMax, idTempsMin, jours, i) {
+function days(idDate, idWeatherMax, idWeatherMin, days, i) {
     $.get(url2, function (response) {
         let aujourdhui = new Date();
-        $(idDate).html((aujourdhui.getDate() + jours) + "/" + aujourdhui.getMonth() + 1 + "/" + aujourdhui.getFullYear());
-        $(idTempsMax).html($(idTempsMax).html() + Math.round(response.daily[i].temp.max) + "°");
-        $(idTempsMin).html($(idTempsMin).html() + Math.round(response.daily[i].temp.min) + "°");
-    })
+        if (parseInt(aujourdhui.getMonth() + 1) < 10) {
+            $(idDate).html((aujourdhui.getDate() + days) + "/" + "0" + parseInt(aujourdhui.getMonth() + 1) + "/" + aujourdhui.getFullYear());
+        }
+        else {
+            $(idDate).html((aujourdhui.getDate() + days) + "/" + parseInt(aujourdhui.getMonth() + 1) + "/" + aujourdhui.getFullYear());
+        }
+        $(idWeatherMax).html($(idWeatherMax).html() + Math.round(response.daily[i].temp.max) + "°");
+        $(idWeatherMin).html($(idWeatherMin).html() + Math.round(response.daily[i].temp.min) + "°");
+    });
 }
