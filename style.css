@@ -15,7 +15,7 @@ body {
     font-size: 30px;
 }
 
-#container{
+#container {
     width: 60%;
     margin: auto;
     display: flex;
@@ -24,7 +24,7 @@ body {
     flex-direction: column;
 }
 
-#temps{
+#weather {
     background-color: #1A7B99;
     width: 100%;
     display: flex;
@@ -34,53 +34,53 @@ body {
     color: white;
 }
 
-h1{
+h1 {
     font-size: 45px;
 }
 
-#temperature{
+#temperature {
     font-size: 80PX;
 }
 
-.row{
+.row {
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
 }
 
-#tempsMax, #sunrise, #humidity{
+#degreeMax, #sunrise, #humidity {
     margin-right: 10px;
 }
 
-.traits{
+.horizontalLine {
     border-top: 2px solid white;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.traits2{
+.verticalLine {
     border-left: 2px solid white;
     margin-right: 5px;
     margin-left: 5px;
     height: 200px;
 }
 
-#previsions{
+#forecasts {
     display: flex;
     flex-direction: row;
 }
 
-#jour1, #jour2, #jour3, #jour4{
+#day1, #day2, #day3, #day4 {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#autreInfos{
+#otherInfos{
     margin-top: 30px;
 }
 
-#imageTemps1, #imageTemps2, #imageTemps3, #imageTemps4{
+#imageWeather1, #imageWeather2, #imageWeather3, #imageWeather4 {
     width: 50px;
 }
 
@@ -94,13 +94,13 @@ h1{
     .row{
         font-size: 20px;
     }
-    #previsions{
+    #forecasts{
         flex-direction: column;
     }
-    #jour1, #jour2, #jour3, #jour4{
+    #day1, #day2, #day3, #day4 {
         flex-direction: row;
     }
-    .traits2{
+    .verticalLine {
         border-top: 2px solid white;
         height: 0;
         width: 100%;
@@ -110,10 +110,10 @@ h1{
 }
 
 @media screen and (max-width: 600px) {
-    #jour1, #jour2, #jour3, #jour4{
+    #day1, #day2, #day3, #day4 {
         font-size: 20px;
     }
-    #imageTemps1, #imageTemps2, #imageTemps3, #imageTemps4{
+    #imageWeather1, #imageWeather2, #imageWeather3, #imageWeather4 {
         width: 25px;
     }
 }
